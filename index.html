@@ -9,14 +9,12 @@
 
 :root{
   --bg:#ffffff;
-  --panel:#ffffff;
   --text:#1f1f1f;
   --muted:#71767b;
   --line:#e5e7e8;
   --lime:#b6d400;
   --lime-soft:#f3f7d7;
   --soft:#f5f6f7;
-  --navy:#556878;
   --shadow:0 6px 18px rgba(0,0,0,.05);
 }
 
@@ -29,52 +27,8 @@ html,body{
   font-family:'Montserrat','Avenir Next',Arial,sans-serif;
 }
 body{overflow-x:hidden}
-.wrap{
-  width:100%;
-  padding:0;
-}
-.head{
-  padding:8px 10px 12px;
-}
-.eyebrow{
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:.12em;
-  color:#728900;
-  font-weight:800;
-}
-h1{
-  margin:5px 0 4px;
-  font-size:20px;
-  line-height:1.15;
-  font-weight:800;
-  letter-spacing:-.02em;
-}
-.sub{
-  font-size:12px;
-  color:var(--muted);
-}
-.badge{
-  margin-top:10px;
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  background:var(--lime-soft);
-  color:#637600;
-  border-radius:999px;
-  padding:6px 10px;
-  font-size:11px;
-  font-weight:800;
-  text-transform:uppercase;
-}
-.badge:before{
-  content:"";
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:var(--lime);
-}
 
+.wrap{width:100%;padding:0}
 .panel{
   border:1px solid var(--line);
   border-radius:10px;
@@ -104,18 +58,18 @@ h1{
 
 .layout{
   display:grid;
-  grid-template-columns: 185px 1fr;
+  grid-template-columns:180px 1fr;
   gap:14px;
-  align-items:start;
+  align-items:stretch;
 }
+
 .chart-box{
   display:flex;
-  flex-direction:column;
   align-items:center;
   justify-content:center;
-  min-height:100%;
-  padding-top:4px;
+  min-height:224px;
 }
+
 .ring{
   --p:68;
   width:150px;
@@ -129,7 +83,7 @@ h1{
   transition:transform .15s ease, box-shadow .15s ease;
 }
 .ring:hover{
-  transform:translateY(-1px);
+  transform:translateY(-2px);
   box-shadow:0 8px 18px rgba(0,0,0,.08);
 }
 .ring:after{
@@ -156,39 +110,36 @@ h1{
   margin-top:4px;
   font-weight:600;
 }
-.ring-help{
-  margin-top:10px;
-  font-size:10px;
-  color:var(--muted);
-  text-align:center;
-}
 
 .kpis{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:10px;
+  min-height:224px;
 }
 .kpi{
   border:1px solid var(--line);
   border-radius:9px;
-  padding:12px;
+  padding:14px;
   background:var(--soft);
-  min-height:96px;
+  min-height:107px;
   cursor:pointer;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
   transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
 }
 .kpi:hover{
-  transform:translateY(-1px);
+  transform:translateY(-2px);
   box-shadow:0 8px 18px rgba(0,0,0,.06);
-  border-color:#d8dcdf;
+  border-color:#d6dadd;
 }
 .kpi.active{
   border-color:var(--lime);
-  box-shadow:0 0 0 2px rgba(182,212,0,.16);
+  box-shadow:0 0 0 2px rgba(182,212,0,.15);
 }
-.kpi.lime{
-  background:var(--lime-soft);
-}
+.kpi.lime{background:var(--lime-soft)}
+
 .label{
   font-size:9px;
   color:var(--muted);
@@ -197,9 +148,9 @@ h1{
   letter-spacing:.07em;
 }
 .value{
-  font-size:26px;
+  font-size:27px;
   font-weight:800;
-  line-height:1.04;
+  line-height:1;
   margin-top:10px;
   letter-spacing:-.03em;
 }
@@ -214,99 +165,28 @@ h1{
   font-weight:500;
 }
 
-.detail{
-  margin-top:14px;
-  border:1px solid var(--line);
-  border-radius:10px;
-  padding:14px;
-  background:#fafbfb;
+@media(max-width:620px){
+  .layout{grid-template-columns:1fr}
+  .chart-box{min-height:170px}
 }
-.detail-head{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:12px;
-}
-.detail-kicker{
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:.08em;
-  color:var(--muted);
-  font-weight:800;
-}
-.detail-title{
-  margin-top:4px;
-  font-size:16px;
-  font-weight:800;
-}
-.detail-text{
-  margin-top:7px;
-  font-size:12px;
-  line-height:1.55;
-  color:#4f5559;
-}
-.ctas{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-top:12px;
-}
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:34px;
-  padding:8px 12px;
-  border-radius:999px;
-  text-decoration:none;
-  font-size:11px;
-  font-weight:800;
-  letter-spacing:.02em;
-  transition:transform .15s ease, background .15s ease, border-color .15s ease;
-}
-.btn:hover{transform:translateY(-1px)}
-.btn-primary{
-  background:var(--lime);
-  color:#243000;
-}
-.btn-secondary{
-  background:#fff;
-  color:#364049;
-  border:1px solid #d9dfe3;
-}
-
-@media(max-width:700px){
-  .layout{
-    grid-template-columns:1fr;
-  }
-  .chart-box{
-    align-items:center;
-  }
-}
-
-@media(max-width:520px){
-  .kpis{
-    grid-template-columns:1fr;
-  }
+@media(max-width:420px){
+  .kpis{grid-template-columns:1fr}
 }
 </style>
 </head>
 <body>
 <div class="wrap">
-  
-
   <section class="panel">
     <div class="title">Vue d’ensemble</div>
 
     <div class="layout">
       <div class="chart-box">
-        <div class="ring" id="ringAction" role="button" tabindex="0" aria-label="Afficher le détail de l'avancement global">
+        <div class="ring" id="ringAction" role="button" tabindex="0" aria-label="Avancement global du projet">
           <div class="ringin">
             <strong>68%</strong>
             <span>du projet</span>
           </div>
         </div>
-        <div class="ring-help">Cliquer pour afficher le détail</div>
       </div>
 
       <div class="kpis">
@@ -335,109 +215,16 @@ h1{
         </div>
       </div>
     </div>
-
-    <div class="detail" id="detailBox">
-      <div class="detail-head">
-        <div>
-          <div class="detail-kicker" id="detailKicker">Indicateur sélectionné</div>
-          <div class="detail-title" id="detailTitle">Tâches ouvertes</div>
-        </div>
-      </div>
-      <div class="detail-text" id="detailText">
-        12 tâches restent à traiter à ce jour. Cet indicateur permet de suivre rapidement la charge opérationnelle encore ouverte sur le projet.
-      </div>
-      <div class="ctas" id="detailCtas">
-        <a class="btn btn-primary" href="#">Ouvrir Planner</a>
-        <a class="btn btn-secondary" href="#">Voir le détail</a>
-      </div>
-    </div>
   </section>
 </div>
 
 <script>
-const contents = {
-  tasks: {
-    kicker: "Indicateur sélectionné",
-    title: "Tâches ouvertes",
-    text: "12 tâches restent à traiter à ce jour. Cet indicateur permet de suivre rapidement la charge opérationnelle encore ouverte sur le projet.",
-    ctas: [
-      {label: "Ouvrir Planner", style: "primary", href: "#"},
-      {label: "Voir le détail", style: "secondary", href: "#"}
-    ]
-  },
-  milestone: {
-    kicker: "Indicateur sélectionné",
-    title: "Prochain jalon — COPIL phase 2",
-    text: "Le prochain jalon structurant du projet est le COPIL phase 2, prévu le 14 octobre 2026. Il constitue le prochain point de validation de l’avancement.",
-    ctas: [
-      {label: "Voir le jalon", style: "primary", href: "#"},
-      {label: "Accéder aux documents", style: "secondary", href: "#"}
-    ]
-  },
-  budget: {
-    kicker: "Indicateur sélectionné",
-    title: "Budget suivi",
-    text: "Le budget engagé représente actuellement 3,2 M€ sur une enveloppe de référence de 4,5 M€. Cet indicateur donne une vision synthétique de l’avancement financier du projet.",
-    ctas: [
-      {label: "Ouvrir le reporting", style: "primary", href: "#"},
-      {label: "Voir les détails financiers", style: "secondary", href: "#"}
-    ]
-  },
-  meetings: {
-    kicker: "Indicateur sélectionné",
-    title: "Réunions à venir",
-    text: "Deux réunions sont actuellement planifiées dans les 30 prochains jours, dont le prochain comité de pilotage. Cet indicateur permet de visualiser rapidement les échéances de gouvernance.",
-    ctas: [
-      {label: "Ouvrir le calendrier", style: "primary", href: "#"},
-      {label: "Voir les invitations", style: "secondary", href: "#"}
-    ]
-  },
-  progress: {
-    kicker: "Indicateur sélectionné",
-    title: "Avancement global",
-    text: "L’avancement global du projet est estimé à 68 %. Ce visuel offre une lecture rapide du niveau de progression global sans entrer dans le détail des sous-phases.",
-    ctas: [
-      {label: "Voir l’avancement", style: "primary", href: "#"},
-      {label: "Consulter les jalons", style: "secondary", href: "#"}
-    ]
-  }
-};
-
 const cards = document.querySelectorAll(".kpi");
-const detailKicker = document.getElementById("detailKicker");
-const detailTitle = document.getElementById("detailTitle");
-const detailText = document.getElementById("detailText");
-const detailCtas = document.getElementById("detailCtas");
-const ring = document.getElementById("ringAction");
-
-function renderDetail(key) {
-  const item = contents[key];
-  if (!item) return;
-
-  cards.forEach(card => card.classList.toggle("active", card.dataset.key === key));
-  detailKicker.textContent = item.kicker;
-  detailTitle.textContent = item.title;
-  detailText.textContent = item.text;
-  detailCtas.innerHTML = "";
-  item.ctas.forEach(cta => {
-    const a = document.createElement("a");
-    a.className = "btn " + (cta.style === "primary" ? "btn-primary" : "btn-secondary");
-    a.href = cta.href;
-    a.textContent = cta.label;
-    detailCtas.appendChild(a);
-  });
-}
-
 cards.forEach(card => {
-  card.addEventListener("click", () => renderDetail(card.dataset.key));
-});
-
-ring.addEventListener("click", () => renderDetail("progress"));
-ring.addEventListener("keydown", (e) => {
-  if (e.key === "Enter" || e.key === " ") {
-    e.preventDefault();
-    renderDetail("progress");
-  }
+  card.addEventListener("click", () => {
+    cards.forEach(c => c.classList.remove("active"));
+    card.classList.add("active");
+  });
 });
 </script>
 </body>
