@@ -3,80 +3,447 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Tableau de bord projet — Reims Habitat</title>
+<title>Dashboard projet — Reims Habitat</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
-:root{--bg:#f7f7f5;--panel:#fff;--text:#222222;--muted:#6e6e6e;--line:#e7e7e3;--green:#b4cc00;--green-dark:#7f9500;--blue:#f3f6f7;--violet:#f4f3f1;--amber:#f7f4e8;--shadow:0 10px 28px rgba(0,0,0,.06)}
-*{box-sizing:border-box} body{margin:0;background:var(--bg);font-family:'Montserrat','Avenir Next',Arial,sans-serif;color:var(--text)}
-.wrap{width:min(1180px,calc(100% - 32px));margin:24px auto}.header{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;margin-bottom:18px}
-.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.13em;color:var(--green-dark);font-weight:800;margin-bottom:8px}
-h1{margin:0;font-size:30px;line-height:1.12;font-weight:800;letter-spacing:-.02em}.sub{margin-top:8px;color:var(--muted);font-size:13px;font-weight:500}
-.badge{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:999px;background:#eef3c8;color:#596800;font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
-.badge:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green)}
-.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:16px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow);padding:20px}
-.panel-title{font-weight:800;font-size:15px;margin-bottom:16px;text-transform:uppercase;letter-spacing:.035em;position:relative;padding-left:14px}.panel-title:before{content:'';position:absolute;left:0;top:2px;bottom:2px;width:4px;border-radius:8px;background:var(--green)}.progress-wrap{display:grid;grid-template-columns:180px 1fr;gap:18px;align-items:center}
-.ring{--p:68;width:160px;aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--green) calc(var(--p)*1%),#e9ecef 0);position:relative}
-.ring:after{content:"";position:absolute;inset:16px;background:white;border-radius:50%}.ring-inner{z-index:2;text-align:center}.ring strong{display:block;font-size:34px}.ring span{display:block;color:var(--muted);font-size:12px;margin-top:5px}
-.bar-group{display:grid;gap:12px}.bar-row{display:grid;grid-template-columns:130px 1fr 46px;align-items:center;gap:10px;font-size:13px}
-.bar-track{height:10px;background:#edf0f2;border-radius:99px;overflow:hidden}.bar-fill{height:100%;border-radius:99px;background:var(--green)}.bar-fill.gray{background:#94a0aa}.bar-fill.navy{background:#566979}
-.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.kpi{border:1px solid var(--line);border-radius:8px;padding:17px;min-height:118px}.blue{background:var(--blue)}.green{background:#f2f5d8}.violet{background:var(--violet)}.amber{background:var(--amber)}
-.kpi-label{font-size:10px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.08em}.kpi-value{margin-top:11px;font-size:29px;line-height:1;font-weight:800;letter-spacing:-.03em}.kpi-foot{margin-top:8px;color:var(--muted);font-size:12px}
-.timeline{display:grid;gap:10px}.timeline-item{display:grid;grid-template-columns:92px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.timeline-item:last-child{border-bottom:0}
-.date{font-size:12px;color:var(--muted);font-weight:700}.event-title{font-weight:700;font-size:14px}.event-meta{margin-top:4px;font-size:12px;color:var(--muted)}
-.note{margin-top:16px;padding:12px 14px;border-radius:12px;background:#f9fafb;border:1px dashed #d9dde1;font-size:12px;color:var(--muted)}
-.footer{margin-top:14px;font-size:11px;color:#8a949c;text-align:right}
-@media(max-width:900px){.grid{grid-template-columns:1fr}.progress-wrap{grid-template-columns:1fr}.ring{margin:auto}}
-@media(max-width:600px){.wrap{width:min(100% - 20px,1180px);margin:12px auto}.header{flex-direction:column}.kpis{grid-template-columns:1fr}.bar-row{grid-template-columns:100px 1fr 40px}h1{font-size:23px}}
+
+:root{
+  --bg:#ffffff;
+  --panel:#ffffff;
+  --text:#1f1f1f;
+  --muted:#71767b;
+  --line:#e5e7e8;
+  --lime:#b6d400;
+  --lime-soft:#f3f7d7;
+  --soft:#f5f6f7;
+  --navy:#556878;
+  --shadow:0 6px 18px rgba(0,0,0,.05);
+}
+
+*{box-sizing:border-box}
+html,body{
+  margin:0;
+  padding:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Montserrat','Avenir Next',Arial,sans-serif;
+}
+body{overflow-x:hidden}
+.wrap{
+  width:100%;
+  padding:0;
+}
+.head{
+  padding:8px 10px 12px;
+}
+.eyebrow{
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  color:#728900;
+  font-weight:800;
+}
+h1{
+  margin:5px 0 4px;
+  font-size:20px;
+  line-height:1.15;
+  font-weight:800;
+  letter-spacing:-.02em;
+}
+.sub{
+  font-size:12px;
+  color:var(--muted);
+}
+.badge{
+  margin-top:10px;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  background:var(--lime-soft);
+  color:#637600;
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:11px;
+  font-weight:800;
+  text-transform:uppercase;
+}
+.badge:before{
+  content:"";
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--lime);
+}
+
+.panel{
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:14px;
+  background:#fff;
+  box-shadow:var(--shadow);
+}
+.title{
+  font-size:13px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.03em;
+  margin-bottom:14px;
+  padding-left:10px;
+  position:relative;
+}
+.title:before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:1px;
+  bottom:1px;
+  width:4px;
+  background:var(--lime);
+  border-radius:6px;
+}
+
+.layout{
+  display:grid;
+  grid-template-columns: 185px 1fr;
+  gap:14px;
+  align-items:start;
+}
+.chart-box{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:100%;
+  padding-top:4px;
+}
+.ring{
+  --p:68;
+  width:150px;
+  aspect-ratio:1;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:conic-gradient(var(--lime) calc(var(--p)*1%), #eceff1 0);
+  position:relative;
+  cursor:pointer;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.ring:hover{
+  transform:translateY(-1px);
+  box-shadow:0 8px 18px rgba(0,0,0,.08);
+}
+.ring:after{
+  content:"";
+  position:absolute;
+  inset:16px;
+  border-radius:50%;
+  background:#fff;
+}
+.ringin{
+  position:relative;
+  z-index:2;
+  text-align:center;
+}
+.ring strong{
+  display:block;
+  font-size:34px;
+  line-height:1;
+}
+.ring span{
+  display:block;
+  font-size:11px;
+  color:var(--muted);
+  margin-top:4px;
+  font-weight:600;
+}
+.ring-help{
+  margin-top:10px;
+  font-size:10px;
+  color:var(--muted);
+  text-align:center;
+}
+
+.kpis{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.kpi{
+  border:1px solid var(--line);
+  border-radius:9px;
+  padding:12px;
+  background:var(--soft);
+  min-height:96px;
+  cursor:pointer;
+  transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+.kpi:hover{
+  transform:translateY(-1px);
+  box-shadow:0 8px 18px rgba(0,0,0,.06);
+  border-color:#d8dcdf;
+}
+.kpi.active{
+  border-color:var(--lime);
+  box-shadow:0 0 0 2px rgba(182,212,0,.16);
+}
+.kpi.lime{
+  background:var(--lime-soft);
+}
+.label{
+  font-size:9px;
+  color:var(--muted);
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.07em;
+}
+.value{
+  font-size:26px;
+  font-weight:800;
+  line-height:1.04;
+  margin-top:10px;
+  letter-spacing:-.03em;
+}
+.value.small{
+  font-size:17px;
+  line-height:1.2;
+}
+.foot{
+  margin-top:8px;
+  font-size:10px;
+  color:var(--muted);
+  font-weight:500;
+}
+
+.detail{
+  margin-top:14px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:14px;
+  background:#fafbfb;
+}
+.detail-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+}
+.detail-kicker{
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  color:var(--muted);
+  font-weight:800;
+}
+.detail-title{
+  margin-top:4px;
+  font-size:16px;
+  font-weight:800;
+}
+.detail-text{
+  margin-top:7px;
+  font-size:12px;
+  line-height:1.55;
+  color:#4f5559;
+}
+.ctas{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:34px;
+  padding:8px 12px;
+  border-radius:999px;
+  text-decoration:none;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.02em;
+  transition:transform .15s ease, background .15s ease, border-color .15s ease;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{
+  background:var(--lime);
+  color:#243000;
+}
+.btn-secondary{
+  background:#fff;
+  color:#364049;
+  border:1px solid #d9dfe3;
+}
+
+@media(max-width:700px){
+  .layout{
+    grid-template-columns:1fr;
+  }
+  .chart-box{
+    align-items:center;
+  }
+}
+
+@media(max-width:520px){
+  .kpis{
+    grid-template-columns:1fr;
+  }
+}
 </style>
 </head>
 <body>
-<main class="wrap">
-  <div class="header">
-    <div><div class="eyebrow">Projet • Reims Habitat</div><h1>RÉHABILITATION — RÉSIDENCE ORGEVAL</h1><div class="sub">Synthèse de pilotage du projet</div></div>
+<div class="wrap">
+  <header class="head">
+    <div class="eyebrow">Projet · Reims Habitat</div>
+    <h1>RÉHABILITATION — RÉSIDENCE ORGEVAL</h1>
+    <div class="sub">Synthèse de pilotage du projet</div>
     <div class="badge">En cours</div>
-  </div>
+  </header>
 
-  <section class="grid">
-    <div class="panel">
-      <div class="panel-title">Avancement global</div>
-      <div class="progress-wrap">
-        <div class="ring"><div class="ring-inner"><strong>68%</strong><span>du projet</span></div></div>
-        <div class="bar-group">
-          <div class="bar-row"><span>Études</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><strong>100%</strong></div>
-          <div class="bar-row"><span>Travaux</span><div class="bar-track"><div class="bar-fill navy" style="width:60%"></div></div><strong>60%</strong></div>
-          <div class="bar-row"><span>Livraison</span><div class="bar-track"><div class="bar-fill gray" style="width:15%"></div></div><strong>15%</strong></div>
+  <section class="panel">
+    <div class="title">Vue d’ensemble</div>
+
+    <div class="layout">
+      <div class="chart-box">
+        <div class="ring" id="ringAction" role="button" tabindex="0" aria-label="Afficher le détail de l'avancement global">
+          <div class="ringin">
+            <strong>68%</strong>
+            <span>du projet</span>
+          </div>
+        </div>
+        <div class="ring-help">Cliquer pour afficher le détail</div>
+      </div>
+
+      <div class="kpis">
+        <div class="kpi active" data-key="tasks">
+          <div class="label">Tâches ouvertes</div>
+          <div class="value">12</div>
+          <div class="foot">sur 37 tâches</div>
+        </div>
+
+        <div class="kpi lime" data-key="milestone">
+          <div class="label">Prochain jalon</div>
+          <div class="value small">COPIL phase 2</div>
+          <div class="foot">14 octobre 2026</div>
+        </div>
+
+        <div class="kpi" data-key="budget">
+          <div class="label">Budget suivi</div>
+          <div class="value">3,2 M€</div>
+          <div class="foot">sur 4,5 M€</div>
+        </div>
+
+        <div class="kpi" data-key="meetings">
+          <div class="label">Réunions à venir</div>
+          <div class="value">2</div>
+          <div class="foot">dans les 30 prochains jours</div>
         </div>
       </div>
     </div>
 
-    <div class="panel">
-      <div class="panel-title">Indicateurs clés</div>
-      <div class="kpis">
-        <div class="kpi blue"><div class="kpi-label">Tâches ouvertes</div><div class="kpi-value">12</div><div class="kpi-foot">sur 37 tâches</div></div>
-        <div class="kpi green"><div class="kpi-label">Prochain jalon</div><div class="kpi-value" style="font-size:20px">COPIL phase 2</div><div class="kpi-foot">14 octobre 2026</div></div>
-        <div class="kpi amber"><div class="kpi-label">Budget suivi</div><div class="kpi-value">3,2 M€</div><div class="kpi-foot">sur 4,5 M€</div></div>
-        <div class="kpi violet"><div class="kpi-label">Réunions à venir</div><div class="kpi-value">2</div><div class="kpi-foot">dans les 30 prochains jours</div></div>
+    <div class="detail" id="detailBox">
+      <div class="detail-head">
+        <div>
+          <div class="detail-kicker" id="detailKicker">Indicateur sélectionné</div>
+          <div class="detail-title" id="detailTitle">Tâches ouvertes</div>
+        </div>
       </div>
-    </div>
-
-    <div class="panel">
-      <div class="panel-title">Suivi financier</div>
-      <div class="bar-group">
-        <div class="bar-row"><span>Budget engagé</span><div class="bar-track"><div class="bar-fill navy" style="width:71%"></div></div><strong>71%</strong></div>
-        <div class="bar-row"><span>Subventions</span><div class="bar-track"><div class="bar-fill" style="width:55%"></div></div><strong>55%</strong></div>
-        <div class="bar-row"><span>Reste à engager</span><div class="bar-track"><div class="bar-fill gray" style="width:29%"></div></div><strong>29%</strong></div>
+      <div class="detail-text" id="detailText">
+        12 tâches restent à traiter à ce jour. Cet indicateur permet de suivre rapidement la charge opérationnelle encore ouverte sur le projet.
       </div>
-    </div>
-
-    <div class="panel">
-      <div class="panel-title">Prochaines échéances</div>
-      <div class="timeline">
-        <div class="timeline-item"><div class="date">08/10/2026</div><div><div class="event-title">Validation des plans techniques</div><div class="event-meta">Direction du Patrimoine</div></div></div>
-        <div class="timeline-item"><div class="date">14/10/2026</div><div><div class="event-title">COPIL — Phase 2</div><div class="event-meta">Comité de pilotage</div></div></div>
-        <div class="timeline-item"><div class="date">28/10/2026</div><div><div class="event-title">Réunion d'information locataires</div><div class="event-meta">Relation locataires</div></div></div>
+      <div class="ctas" id="detailCtas">
+        <a class="btn btn-primary" href="#">Ouvrir Planner</a>
+        <a class="btn btn-secondary" href="#">Voir le détail</a>
       </div>
     </div>
   </section>
-</main>
+</div>
+
+<script>
+const contents = {
+  tasks: {
+    kicker: "Indicateur sélectionné",
+    title: "Tâches ouvertes",
+    text: "12 tâches restent à traiter à ce jour. Cet indicateur permet de suivre rapidement la charge opérationnelle encore ouverte sur le projet.",
+    ctas: [
+      {label: "Ouvrir Planner", style: "primary", href: "#"},
+      {label: "Voir le détail", style: "secondary", href: "#"}
+    ]
+  },
+  milestone: {
+    kicker: "Indicateur sélectionné",
+    title: "Prochain jalon — COPIL phase 2",
+    text: "Le prochain jalon structurant du projet est le COPIL phase 2, prévu le 14 octobre 2026. Il constitue le prochain point de validation de l’avancement.",
+    ctas: [
+      {label: "Voir le jalon", style: "primary", href: "#"},
+      {label: "Accéder aux documents", style: "secondary", href: "#"}
+    ]
+  },
+  budget: {
+    kicker: "Indicateur sélectionné",
+    title: "Budget suivi",
+    text: "Le budget engagé représente actuellement 3,2 M€ sur une enveloppe de référence de 4,5 M€. Cet indicateur donne une vision synthétique de l’avancement financier du projet.",
+    ctas: [
+      {label: "Ouvrir le reporting", style: "primary", href: "#"},
+      {label: "Voir les détails financiers", style: "secondary", href: "#"}
+    ]
+  },
+  meetings: {
+    kicker: "Indicateur sélectionné",
+    title: "Réunions à venir",
+    text: "Deux réunions sont actuellement planifiées dans les 30 prochains jours, dont le prochain comité de pilotage. Cet indicateur permet de visualiser rapidement les échéances de gouvernance.",
+    ctas: [
+      {label: "Ouvrir le calendrier", style: "primary", href: "#"},
+      {label: "Voir les invitations", style: "secondary", href: "#"}
+    ]
+  },
+  progress: {
+    kicker: "Indicateur sélectionné",
+    title: "Avancement global",
+    text: "L’avancement global du projet est estimé à 68 %. Ce visuel offre une lecture rapide du niveau de progression global sans entrer dans le détail des sous-phases.",
+    ctas: [
+      {label: "Voir l’avancement", style: "primary", href: "#"},
+      {label: "Consulter les jalons", style: "secondary", href: "#"}
+    ]
+  }
+};
+
+const cards = document.querySelectorAll(".kpi");
+const detailKicker = document.getElementById("detailKicker");
+const detailTitle = document.getElementById("detailTitle");
+const detailText = document.getElementById("detailText");
+const detailCtas = document.getElementById("detailCtas");
+const ring = document.getElementById("ringAction");
+
+function renderDetail(key) {
+  const item = contents[key];
+  if (!item) return;
+
+  cards.forEach(card => card.classList.toggle("active", card.dataset.key === key));
+  detailKicker.textContent = item.kicker;
+  detailTitle.textContent = item.title;
+  detailText.textContent = item.text;
+  detailCtas.innerHTML = "";
+  item.ctas.forEach(cta => {
+    const a = document.createElement("a");
+    a.className = "btn " + (cta.style === "primary" ? "btn-primary" : "btn-secondary");
+    a.href = cta.href;
+    a.textContent = cta.label;
+    detailCtas.appendChild(a);
+  });
+}
+
+cards.forEach(card => {
+  card.addEventListener("click", () => renderDetail(card.dataset.key));
+});
+
+ring.addEventListener("click", () => renderDetail("progress"));
+ring.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    renderDetail("progress");
+  }
+});
+</script>
 </body>
 </html>
